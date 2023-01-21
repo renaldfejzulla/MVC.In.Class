@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MVC.In.Class.DataAcessLayer.Entities;
 
-namespace MVC.In.Class.DataAcessLayer.Entities
+namespace MVC.In.Class.DataAcessLayer.Context
 {
     public class LibraryDBContext : DbContext
     {

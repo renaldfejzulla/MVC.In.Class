@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using MVC.In.Class.DataAcessLayer.Entities;
+using MVC.In.Class.DataAcessLayer.Context;
 using System.Text.Json.Serialization;
 
 namespace MVC.In.Class

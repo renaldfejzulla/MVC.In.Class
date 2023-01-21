@@ -13,25 +13,23 @@ namespace MVC.In.Class.DataAcessLayer.Entities
                 BirthYear = new DateTime(1913, 2, 2)
             };
 
-            _ = modelBuilder.Entity<Author>().HasData(author
-            );
+            _ = modelBuilder.Entity<Author>().HasData(author);
+
             var book = new Book
             {
                 Id = Guid.NewGuid(),
                 Title = "The Hobbit",
                 Price = 1500,
                 PublishedYear = new DateTime(1980, 2, 2),
-
             };
-            modelBuilder.Entity<Book>().HasData(book
-            );
-            modelBuilder.Entity<AuthorBook>().HasData(
+            _ = modelBuilder.Entity<Book>().HasData(book);
+
+            _ = modelBuilder.Entity<AuthorBook>().HasData(
             new AuthorBook
             {
                 Id = Guid.NewGuid(),
                 BookId = book.Id,
                 AuthorId = author.Id,
-
             });
         }
     }
