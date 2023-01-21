@@ -9,6 +9,6 @@
         public string Name { get; set; }
         public DateTime BirthYear { get; set; }
         public virtual ICollection<AuthorBook> AuthorBooks { get; set; }
-
+      
     }
 }

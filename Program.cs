@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MVC.In.Class.DataAcessLayer.Entities;
+using MVC.In.Class.repository;
 using System.Text.Json.Serialization;
 
 namespace MVC.In.Class
@@ -17,14 +18,14 @@ namespace MVC.In.Class
             // add database dependecy
             _ = builder.Services.AddDbContext<LibraryDBContext>(c =>
             {
-                c.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                c.UseSqlServer(builder.Configuration.GetConnectionString("Library"));
                 c.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
 
-
+            builder.Services.AddScoped<ILogin, AuthenticateLogin>();
             var app = builder.Build();
-
+           
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -42,7 +43,7 @@ namespace MVC.In.Class
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=Index}/{id?}");
 
             app.Run();
         }

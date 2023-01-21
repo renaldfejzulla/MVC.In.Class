@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<html>
+<head>
+</head>
+ 
+<body>
+<div class="login">
+  <h1>Login to Library</h1>
+ 
+  <form method="post" enctype="multipart/form-data" asp-controller="Login" asp-action="Index" >
+    <p><input type="text" name="username" value="" placeholder="Username or Email" required></p>     
+    <p><input type="password" name="Password" value="" placeholder="Password" required></p>     
+    <p class="submit"><input type="submit" name="commit" value="Login"></p>
+    <hr/>
+    @ViewBag.username
+  </form>
+</div> 
+</body>
+</html>

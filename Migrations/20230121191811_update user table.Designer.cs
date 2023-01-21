@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC.In.Class.Migrations
 {
     [DbContext(typeof(LibraryDBContext))]
-    [Migration("20230121113028_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230121191811_update user table")]
+    partial class updateusertable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,9 +53,9 @@ namespace MVC.In.Class.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cc4def90-0ba4-4f47-bdbc-e259de499135"),
+                            Id = new Guid("059c294e-a47b-4bbd-81db-a1b4a312e8fc"),
                             BirthYear = new DateTime(1913, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateCreated = new DateTime(2023, 1, 21, 12, 30, 28, 24, DateTimeKind.Local).AddTicks(2132),
+                            DateCreated = new DateTime(2023, 1, 21, 20, 18, 11, 66, DateTimeKind.Local).AddTicks(2018),
                             IsDeleted = false,
                             Name = "JJR Tolkien"
                         });
@@ -93,10 +93,10 @@ namespace MVC.In.Class.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("ed7c982b-ab62-45ae-8225-9ad11b2b6df7"),
-                            AuthorId = new Guid("cc4def90-0ba4-4f47-bdbc-e259de499135"),
-                            BookId = new Guid("9d923315-ba71-4f3c-a201-585474a909a3"),
-                            DateCreated = new DateTime(2023, 1, 21, 12, 30, 28, 24, DateTimeKind.Local).AddTicks(2583),
+                            Id = new Guid("84d125d6-91dd-4a80-8d85-741f0ea7ae79"),
+                            AuthorId = new Guid("059c294e-a47b-4bbd-81db-a1b4a312e8fc"),
+                            BookId = new Guid("8e0e4cfc-2205-4e9b-a9ec-4418cba94f2c"),
+                            DateCreated = new DateTime(2023, 1, 21, 20, 18, 11, 66, DateTimeKind.Local).AddTicks(2129),
                             IsDeleted = false
                         });
                 });
@@ -133,8 +133,8 @@ namespace MVC.In.Class.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9d923315-ba71-4f3c-a201-585474a909a3"),
-                            DateCreated = new DateTime(2023, 1, 21, 12, 30, 28, 24, DateTimeKind.Local).AddTicks(2523),
+                            Id = new Guid("8e0e4cfc-2205-4e9b-a9ec-4418cba94f2c"),
+                            DateCreated = new DateTime(2023, 1, 21, 20, 18, 11, 66, DateTimeKind.Local).AddTicks(2073),
                             IsDeleted = false,
                             Price = 1500.0,
                             PublishedYear = new DateTime(1980, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -200,6 +200,49 @@ namespace MVC.In.Class.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("MVC.In.Class.DataAcessLayer.Entities.UserLogin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Roles")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserLogins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("04d0c79c-8857-41f0-91a7-768e3ffa4cfc"),
+                            DateCreated = new DateTime(2023, 1, 21, 20, 18, 11, 66, DateTimeKind.Local).AddTicks(1593),
+                            IsDeleted = false,
+                            Password = "123",
+                            Roles = "admin",
+                            UserName = "edi"
+                        });
                 });
 
             modelBuilder.Entity("MVC.In.Class.DataAcessLayer.Entities.AuthorBook", b =>
