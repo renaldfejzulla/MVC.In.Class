@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using MVC.In.Class.DataAcessLayer.Entities;
+using System.Text.Json.Serialization;
+
 namespace MVC.In.Class
 {
     public class Program
@@ -7,7 +11,17 @@ namespace MVC.In.Class
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+            // add database dependecy
+            _ = builder.Services.AddDbContext<LibraryDBContext>(c =>
+            {
+                c.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                c.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+            });
+
 
             var app = builder.Build();
 
