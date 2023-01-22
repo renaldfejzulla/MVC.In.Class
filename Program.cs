@@ -23,7 +23,7 @@ namespace MVC.In.Class
 
             });
 
-            builder.Services.AddScoped<ILogin, AuthenticateLogin>();
+            builder.Services.AddScoped<ILoginRepository, AuthenticateLoginRepository>();
             var app = builder.Build();
            
             // Configure the HTTP request pipeline.

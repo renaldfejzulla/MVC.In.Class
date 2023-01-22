@@ -2,7 +2,7 @@
 
 namespace MVC.In.Class.repository
 {
-    public interface ILogin
+    public interface ILoginRepository
     {
         Task<IEnumerable<UserLogin>> getuser();
         Task<UserLogin> AuthenticateUser(string username, string passcode);

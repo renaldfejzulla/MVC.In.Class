@@ -3,11 +3,11 @@ using MVC.In.Class.DataAcessLayer.Entities;
 
 namespace MVC.In.Class.repository
 {
-    public class AuthenticateLogin : ILogin
+    public class AuthenticateLoginRepository : ILoginRepository
     {
         private readonly LibraryDBContext _context;
 
-        public AuthenticateLogin(LibraryDBContext context)
+        public AuthenticateLoginRepository(LibraryDBContext context)
         {
             _context = context;
         }

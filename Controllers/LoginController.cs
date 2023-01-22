@@ -8,8 +8,8 @@ namespace MVC.In.Class.Controllers
     public class LoginController : Controller
     {
         private readonly ILogger<LoginController> _logger;
-        private readonly ILogin _loginUser;
-        public LoginController(ILogger<LoginController> logger, ILogin loginUser)
+        private readonly ILoginRepository _loginUser;
+        public LoginController(ILogger<LoginController> logger, ILoginRepository loginUser)
         {
             _logger = logger;
             _loginUser = loginUser;
