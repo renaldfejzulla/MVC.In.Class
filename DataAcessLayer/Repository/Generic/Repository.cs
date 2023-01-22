@@ -18,14 +18,18 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Generic
 
         public async Task<T> CreateAsync(T entity)
         {
-           var result = await _context.AddAsync(entity);
+            var result = await _context.AddAsync(entity);
             return result.Entity;
         }
 
         public async void DeleteAsync(T entity)
         {
-
-           
+            var get = entity.GetType().GetProperty("IsDeleted");
+            if (get != null)
+            {
+                entity.GetType().GetProperty("IsDeleted").SetValue(entity, false);
+            }
+            _context.Update(entity);
         }
 
         public Task<IEnumerable<T>> GetAllAsync()
