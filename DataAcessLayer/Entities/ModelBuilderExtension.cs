@@ -31,6 +31,14 @@ namespace MVC.In.Class.DataAcessLayer.Entities
                 BookId = book.Id,
                 AuthorId = author.Id,
             });
+            var user = new UserLogin
+            {
+                Id = Guid.NewGuid(),
+                UserName = "user",
+                Password = "1234",
+                Roles = "admin"
+            };
+            _=modelBuilder.Entity<UserLogin>().HasData(user);
         }
     }
 }

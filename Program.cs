@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MVC.In.Class.DataAcessLayer.Context;
+using MVC.In.Class.DataAcessLayer.Repository;
 using System.Text.Json.Serialization;
 
 namespace MVC.In.Class
@@ -22,6 +23,7 @@ namespace MVC.In.Class
 
             });
 
+            builder.Services.AddScoped<ILoginRepository,AuthenticatonLoginRepository>();
 
             var app = builder.Build();
 
@@ -42,7 +44,7 @@ namespace MVC.In.Class
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=Index}/{id?}");
 
             app.Run();
         }
