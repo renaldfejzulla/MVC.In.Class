@@ -1,7 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    Layout = null;
 }
-
 <html>
 <head>
 </head>
@@ -11,7 +11,9 @@
   <h1>Login to Library</h1>
  
   <form method="post" enctype="multipart/form-data" asp-controller="Login" asp-action="Index" >
+      <label for="username">First name:</label><br>
     <p><input type="text" name="username" value="" placeholder="Username or Email" required></p>     
+    <label for="Password">Password:</label><br>
     <p><input type="password" name="Password" value="" placeholder="Password" required></p>     
     <p class="submit"><input type="submit" name="commit" value="Login"></p>
     <hr/>

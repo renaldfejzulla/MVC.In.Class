@@ -22,10 +22,11 @@ namespace MVC.In.Class.Controllers
         public IActionResult Index(string username,string Password)
         {
             var issuccess = _loginUser.AuthenticateUser(username, Password);
- 
- 
+
+          
             if (issuccess.Result != null)
             {
+                
                 //ViewBag.username = string.Format("Successfully logged-in", username);
                 //RedirectToAction (string actionName, string controllerName);
                 //return View();  
