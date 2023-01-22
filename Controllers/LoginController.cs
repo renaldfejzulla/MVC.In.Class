@@ -32,7 +32,8 @@ namespace MVC.In.Class.Controllers
                 //return View();  
                 return RedirectToAction("Index", "Home");
             }
-            else {
+            else 
+            {
                 ViewBag.username = string.Format("Login Failed ", username);
                 return View();
             }            
