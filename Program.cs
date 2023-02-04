@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using MVC.In.Class.DataAcessLayer.Entities;
 using MVC.In.Class.repository;
+using MVC.In.Class.Services;
+using MVC.In.Class.Services.IServices;
 using System.Text.Json.Serialization;
 
 namespace MVC.In.Class
@@ -24,7 +26,10 @@ namespace MVC.In.Class
             });
             //inject classes into program
             builder.Services.AddScoped<ILoginRepository, AuthenticateLoginRepository>();
-            var app = builder.Build();
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+            builder.Services.AddScoped<IAuthorService, AuthorService>();
+      
+       var app = builder.Build();
            
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
