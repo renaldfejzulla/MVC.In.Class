@@ -22,7 +22,7 @@ namespace MVC.In.Class
                 c.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
-
+            //inject classes into program
             builder.Services.AddScoped<ILoginRepository, AuthenticateLoginRepository>();
             var app = builder.Build();
            
