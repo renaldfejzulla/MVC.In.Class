@@ -10,6 +10,7 @@
         public double Price { get; set; }
         public DateTime PublishedYear { get; set; }
         public virtual ICollection<AuthorBook> AuthorBooks { get; set; }
+      
 
     }
 }

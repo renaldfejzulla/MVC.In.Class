@@ -20,6 +20,7 @@ namespace MVC.In.Class.DataAcessLayer.Context
         public virtual DbSet<Book> Books { get; set; } = null!;
         public virtual DbSet<Client> Clients { get; set; } = null!;
         public virtual DbSet<BookRentals> BookRentals { get; set; } = null!;
+        public virtual DbSet<UserLogin> UserLogins { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

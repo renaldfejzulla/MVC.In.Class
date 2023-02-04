@@ -1,5 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
 using MVC.In.Class.DataAcessLayer.Context;
+=======
+using MVC.In.Class.DataAcessLayer.Entities;
+using MVC.In.Class.repository;
+using MVC.In.Class.Services;
+using MVC.In.Class.Services.IServices;
+>>>>>>> eduartMvc
 using System.Text.Json.Serialization;
 
 namespace MVC.In.Class
@@ -17,14 +24,17 @@ namespace MVC.In.Class
             // add database dependecy
             _ = builder.Services.AddDbContext<LibraryDBContext>(c =>
             {
-                c.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                c.UseSqlServer(builder.Configuration.GetConnectionString("Library"));
                 c.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
-
-
-            var app = builder.Build();
-
+            //inject classes into program
+            builder.Services.AddScoped<ILoginRepository, AuthenticateLoginRepository>();
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+            builder.Services.AddScoped<IAuthorService, AuthorService>();
+      
+       var app = builder.Build();
+           
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -42,7 +52,7 @@ namespace MVC.In.Class
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Login}/{action=Index}/{id?}");
 
             app.Run();
         }
