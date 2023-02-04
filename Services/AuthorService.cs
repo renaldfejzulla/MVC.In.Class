@@ -19,5 +19,9 @@ namespace MVC.In.Class.Services
         {
             return await AuthorRepository.GetAllAuthor();
         }
+        public async Task<Author> CreateAuthor(Author author)
+        {
+            return await AuthorRepository.CreateAuthor(author);
+        }
     }
 }

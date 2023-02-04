@@ -5,5 +5,6 @@ namespace MVC.In.Class.Services.IServices
     public interface IAuthorService
     {
         Task<IEnumerable<Author>> GetAll();
+        Task<Author> CreateAuthor(Author author);
     }
 }

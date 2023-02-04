@@ -16,5 +16,12 @@ namespace MVC.In.Class.repository
         {
             return await _context.Authors.Where(author => author.IsDeleted == false).ToListAsync();
         }
+        public async Task<Author> CreateAuthor(Author author)
+        {
+             await  _context.Authors.AddAsync(author);
+            _context.SaveChangesAsync();
+
+            return author;
+        }
     }
 }
