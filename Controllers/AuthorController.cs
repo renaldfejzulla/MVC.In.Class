@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using MVC.In.Class.DataAcessLayer.Entities;
+using MVC.In.Class.Models;
 using MVC.In.Class.Services.IServices;
 
 namespace MVC.In.Class.Controllers
@@ -7,10 +9,12 @@ namespace MVC.In.Class.Controllers
     public class AuthorController : Controller
     {
         private readonly IAuthorService authorService;
-
-        public AuthorController(IAuthorService authorService)
+        // define the mapper
+        private readonly IMapper _mapper;
+        public AuthorController(IAuthorService authorService, IMapper mapper)
         {
             this.authorService = authorService;
+            _mapper = mapper;  
         }
 
         public async Task<IActionResult> Index()
@@ -22,11 +26,14 @@ namespace MVC.In.Class.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Author author)
+        public async Task<IActionResult> Create(AuthorViewModel authorview)
         {
+
+            // utilise the mapping 
+             var _mappedUser = _mapper.Map<Author>(authorview);
             if (ModelState.IsValid)
             {
-                var resultTotal = await authorService.CreateAuthor(author);
+                var resultTotal = await authorService.CreateAuthor(_mappedUser);
             }
            
 

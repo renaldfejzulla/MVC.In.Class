@@ -24,12 +24,14 @@ namespace MVC.In.Class
                 c.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
-            //inject classes into program
+            //inject automapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //inject classes into program           
             builder.Services.AddScoped<ILoginRepository, AuthenticateLoginRepository>();
             builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
             builder.Services.AddScoped<IAuthorService, AuthorService>();
       
-       var app = builder.Build();
+            var app = builder.Build();
            
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
