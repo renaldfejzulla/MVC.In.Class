@@ -1,45 +1,57 @@
-﻿using MVC.In.Class.DataAcessLayer.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using MVC.In.Class.DataAcessLayer.Context;
+using System.Diagnostics;
 
 namespace MVC.In.Class.DataAcessLayer.Repository.Generic
 {
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly LibraryDBContext _context;
+        private DbSet<T> table = null;
+        
+        public Repository()
+        {
+            this._context= new LibraryDBContext();
+            table = _context.Set<T>();
+        }
 
         public Repository(LibraryDBContext context)
         {
             _context = context;
+            table = _context.Set<T>();
         }
 
-        public async Task ComitAsync()
+        public async void Delete(object id)
         {
-            await _context.SaveChangesAsync();
+            T exist= await table.FindAsync(id);
+            table.Remove(exist);
         }
 
-        public async Task<T> CreateAsync(T entity)
+        public IEnumerable<T> GetAll()
         {
-            var result = await _context.AddAsync(entity);
-            return result.Entity;
+            return table.ToList();
         }
 
-        public async void DeleteAsync(T entity)
-        {
-            var get = entity.GetType().GetProperty("IsDeleted");
-            if (get != null)
-            {
-                entity.GetType().GetProperty("IsDeleted").SetValue(entity, false);
-            }
-            _context.Update(entity);
-        }
-
-        public Task<IEnumerable<T>> GetAllAsync()
+        public T GetById(object id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<T> UpdateAsync(T entity)
+        public void Insert(T obj)
+        {
+            table = _context.Set<T>();
+            
+        }
+
+        public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(T obj)
         {
             throw new NotImplementedException();
         }
     }
+
 }

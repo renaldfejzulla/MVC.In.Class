@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using MVC.In.Class.DataAcessLayer.Context;
 using MVC.In.Class.DataAcessLayer.Repository;
+using MVC.In.Class.DataAcessLayer.Repository.Interface;
+using MVC.In.Class.DataAcessLayer.Repository.IRepository;
+using MVC.In.Class.DataAcessLayer.Repository.Repositories;
+using MVC.In.Class.Services;
 using System.Text.Json.Serialization;
 
 namespace MVC.In.Class
@@ -24,6 +28,9 @@ namespace MVC.In.Class
             });
 
             builder.Services.AddScoped<ILoginRepository,AuthenticatonLoginRepository>();
+            builder.Services.AddScoped<IBookRepository,BookRepository>();
+            builder.Services.AddScoped<IAuthorRepository,AuthorRepository>();
+            builder.Services.AddScoped<IAuthorService,AuthorService>();
 
             var app = builder.Build();
 
