@@ -24,7 +24,7 @@ namespace MVC.In.Class.Controllers
             var issuccess = _loginUser.AuthenticateUser(username, Password);
 
           
-            if (issuccess.Result != null)
+            if (issuccess != null)
             {
                 
                 //ViewBag.username = string.Format("Successfully logged-in", username);

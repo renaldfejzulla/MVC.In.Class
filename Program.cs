@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
-<<<<<<< HEAD
 using MVC.In.Class.DataAcessLayer.Context;
-=======
+using MVC.In.Class.repository;
+using MVC.In.Class.Services;
+using MVC.In.Class.Services.IServices;
 using MVC.In.Class.DataAcessLayer.Entities;
 using MVC.In.Class.repository;
 using MVC.In.Class.Services;
 using MVC.In.Class.Services.IServices;
->>>>>>> eduartMvc
+
 using System.Text.Json.Serialization;
 
 namespace MVC.In.Class
@@ -24,7 +25,7 @@ namespace MVC.In.Class
             // add database dependecy
             _ = builder.Services.AddDbContext<LibraryDBContext>(c =>
             {
-                c.UseSqlServer(builder.Configuration.GetConnectionString("Library"));
+                c.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
                 c.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
