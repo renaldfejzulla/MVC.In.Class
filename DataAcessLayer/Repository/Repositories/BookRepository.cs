@@ -35,7 +35,8 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Repositories
         {
             //var result = await _context.Books.Where(x=> x.IsDeleted==false).ToListAsync();
 
-            var result = from book in _context.Books
+            //left join using linQ in C#
+            var result = await (from book in _context.Books
                          join authorBook in _context.AuthorBooks
                          on book.Id equals authorBook.BookId into left
                          from a in left.DefaultIfEmpty()
@@ -45,8 +46,7 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Repositories
                              Title = book.Title,
                              Price = book.Price,
                              PublishedYear = book.PublishedYear
-                         };
-
+                         }).ToListAsync();
             return result;
         }
 

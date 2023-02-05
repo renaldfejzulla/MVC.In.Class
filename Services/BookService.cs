@@ -1,4 +1,5 @@
-﻿using MVC.In.Class.DataAcessLayer.Entities;
+﻿using MVC.In.Class.DataAcessLayer.DTO;
+using MVC.In.Class.DataAcessLayer.Entities;
 using MVC.In.Class.DataAcessLayer.Repository.Interface;
 
 namespace MVC.In.Class.Services
@@ -10,9 +11,10 @@ namespace MVC.In.Class.Services
         {
             _bookRepository= bookRepository ?? throw new ArgumentNullException(nameof(bookRepository));
         }
-        public Task<IEnumerable<Book>> GetBooksAsync()
+        public async Task<IEnumerable<BookDTO>> GetBooksAsync()
         {
-            throw new NotImplementedException();
+            var result = await _bookRepository.GetAllBooks();
+            return result;
         }
     }
 }
