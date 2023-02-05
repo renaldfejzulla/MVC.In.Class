@@ -13,6 +13,13 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Repositories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        public async Task<Author> CreateAsync(Author author)
+        {
+            var result = await _context.Authors.AddAsync(author);
+            _context.SaveChanges();
+            return result.Entity;
+        }
+
         public async Task<IEnumerable<Author>> GetAll()
         {
             var result = await _context.Authors.ToListAsync();

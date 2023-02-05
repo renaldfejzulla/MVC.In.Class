@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MVC.In.Class.DataAcessLayer.Context;
 using MVC.In.Class.DataAcessLayer.Repository;
-using MVC.In.Class.DataAcessLayer.Repository.Interface;
+using MVC.In.Class.DataAcessLayer.Repository;
 using MVC.In.Class.DataAcessLayer.Repository.IRepository;
 using MVC.In.Class.DataAcessLayer.Repository.Repositories;
 using MVC.In.Class.Services;
@@ -22,18 +22,17 @@ namespace MVC.In.Class
             // add database dependecy
             _ = builder.Services.AddDbContext<LibraryDBContext>(c =>
             {
-                c.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                c.UseSqlServer(builder.Configuration.GetConnectionString("Library"));
                 c.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
-
-            builder.Services.AddScoped<ILoginRepository,AuthenticatonLoginRepository>();
-            builder.Services.AddScoped<IBookRepository,BookRepository>();
-            builder.Services.AddScoped<IAuthorRepository,AuthorRepository>();
-            builder.Services.AddScoped<IAuthorService,AuthorService>();
-
-            var app = builder.Build();
-
+            //inject classes into program
+            builder.Services.AddScoped<ILoginRepository, AuthenticatonLoginRepository>();
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+            builder.Services.AddScoped<IAuthorService, AuthorService>();
+      
+       var app = builder.Build();
+           
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {

@@ -15,6 +15,12 @@ namespace MVC.In.Class.Services
             _loginRepository = loginRepository ?? throw new ArgumentNullException(nameof(loginRepository));
         }
 
+        public async Task<Author> Create(Author author)
+        {
+            var result = await _repository.CreateAsync(author);
+            return result;
+        }
+
         public async Task<IEnumerable<Author>> GetAuthorAsync()
         {
             var result = await _repository.GetAll();

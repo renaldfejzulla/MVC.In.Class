@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MVC.In.Class.DataAcessLayer.Entities;
 using MVC.In.Class.Services;
 
 namespace MVC.In.Class.Controllers
@@ -18,5 +19,20 @@ namespace MVC.In.Class.Controllers
             return View(resultTotal);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([FromBody] Author author )
+        {
+            if (ModelState.IsValid)
+            {
+                var addedautor = await _authorService.Create(author);
+
+            }
+            return View();
+        }
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
