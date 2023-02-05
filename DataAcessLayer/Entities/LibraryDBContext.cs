@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MVC.In.Class.Models;
 
 namespace MVC.In.Class.DataAcessLayer.Entities
 {
@@ -26,6 +27,9 @@ namespace MVC.In.Class.DataAcessLayer.Entities
         {
             modelBuilder.Seed();
         }
+
+
+        public DbSet<MVC.In.Class.Models.BooksDto> BooksDto { get; set; }
 
 
     }

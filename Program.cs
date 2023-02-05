@@ -30,7 +30,9 @@ namespace MVC.In.Class
             builder.Services.AddScoped<ILoginRepository, AuthenticateLoginRepository>();
             builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
             builder.Services.AddScoped<IAuthorService, AuthorService>();
-      
+            builder.Services.AddScoped<IBooksRepository, BooksRepository>();
+            builder.Services.AddScoped<IBooksService, BooksService>();
+
             var app = builder.Build();
            
             // Configure the HTTP request pipeline.
