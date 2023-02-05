@@ -7,6 +7,6 @@ namespace MVC.In.Class.Services
     {
         Task<IEnumerable<Author>> GetAuthorAsync();
         Task<Author> Create(Author author);
-        Task<AuthorDTO> GetAuthorById(Guid id);
+        Task<AuthorDTO> GetAuthorById(Guid? id);
     }
 }

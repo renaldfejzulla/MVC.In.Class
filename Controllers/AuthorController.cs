@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MVC.In.Class.DataAcessLayer.DTO;
 using MVC.In.Class.DataAcessLayer.Entities;
 using MVC.In.Class.Models;
 using MVC.In.Class.Services;
@@ -41,7 +42,7 @@ namespace MVC.In.Class.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Details(Guid id)
+        public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
             {
@@ -49,12 +50,14 @@ namespace MVC.In.Class.Controllers
             }
             var author = await _authorService.GetAuthorById(id);
 
-            if (author==null)
+            var mapped = _mapper.Map<AuthorBookViewModel>(author);
+
+            if (mapped==null)
             {
                 return NotFound();
             }
 
-            return View(author);
+            return View(mapped);
         }
 
 

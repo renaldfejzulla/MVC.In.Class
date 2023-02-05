@@ -28,7 +28,7 @@ namespace MVC.In.Class.Services
             return result;
         }
 
-        public async Task<AuthorDTO> GetAuthorById(Guid id)
+        public async Task<AuthorDTO> GetAuthorById(Guid? id)
         {
             var result = await _repository.GetAuthorAsync(id);
             return result;

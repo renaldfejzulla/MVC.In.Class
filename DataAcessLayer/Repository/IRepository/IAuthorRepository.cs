@@ -7,6 +7,6 @@ namespace MVC.In.Class.DataAcessLayer.Repository.IRepository
     {
         Task<IEnumerable<Author>> GetAll();
         Task<Author> CreateAsync(Author author);
-        Task<AuthorDTO> GetAuthorAsync(Guid id);
+        Task<AuthorDTO> GetAuthorAsync(Guid? id);
     }
 }
