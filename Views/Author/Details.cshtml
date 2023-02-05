@@ -1,4 +1,4 @@
-﻿@model MVC.In.Class.Models.AuthorDTO
+﻿@model MVC.In.Class.Models.AuthorBookViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -15,12 +15,6 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BirthYear)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BirthYear)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Price)

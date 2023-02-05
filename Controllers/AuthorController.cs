@@ -54,12 +54,14 @@ namespace MVC.In.Class.Controllers
             }
 
             var author = await authorService.AuthorDetails(id);
-            if (author == null)
+
+            var mappAuthor= _mapper.Map<AuthorBookViewModel>(author);
+            if (mappAuthor == null)
             {
                 return NotFound();
             }
 
-            return View(author);
+            return View(mappAuthor);
         }
     }
 }
