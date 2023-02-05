@@ -44,5 +44,22 @@ namespace MVC.In.Class.Controllers
         {
             return View("Create");
         }
+
+        // GET: Authors/Details/5
+        public async Task<IActionResult> Details(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var author = await authorService.AuthorDetails(id);
+            if (author == null)
+            {
+                return NotFound();
+            }
+
+            return View(author);
+        }
     }
 }

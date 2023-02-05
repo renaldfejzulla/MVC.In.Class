@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVC.In.Class.DataAcessLayer.Entities;
+using MVC.In.Class.Models;
 
 namespace MVC.In.Class.repository
 {
@@ -22,6 +23,24 @@ namespace MVC.In.Class.repository
             _context.SaveChangesAsync();
 
             return author;
+        }
+
+        public async Task<AuthorDTO> GetAuthorAsync(Guid? id)
+        {
+            var res = await (from Author in _context.Authors
+                             join AuthorBook in _context.AuthorBooks on Author.Id
+                             equals AuthorBook.AuthorId
+                             join Book in _context.Books
+                             on AuthorBook.BookId equals Book.Id
+                             where Author.Id == id
+                             select new AuthorDTO
+                             {
+                                 Name = Author.Name,
+                                 BirthYear = Author.BirthYear,
+                                 Title = Book.Title,
+                                 Price = Book.Price
+                             }).FirstOrDefaultAsync();
+            return res;
         }
     }
 }
