@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVC.In.Class.DataAcessLayer.Context;
+using MVC.In.Class.DataAcessLayer.DTO;
 using MVC.In.Class.DataAcessLayer.Entities;
 using MVC.In.Class.DataAcessLayer.Repository.Interface;
 
@@ -30,9 +31,22 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Repositories
 
         }
 
-        public async Task<List<Book>> GetAllBooks()
+        public async Task<IEnumerable<BookDTO>> GetAllBooks()
         {
-            var result = await _context.Books.Where(x=> x.IsDeleted==false).ToListAsync();
+            //var result = await _context.Books.Where(x=> x.IsDeleted==false).ToListAsync();
+
+            var result = from book in _context.Books
+                         join authorBook in _context.AuthorBooks
+                         on book.Id equals authorBook.BookId into left
+                         from a in left.DefaultIfEmpty()
+                         select new BookDTO
+                         {
+                             Id = book.Id,
+                             Title = book.Title,
+                             Price = book.Price,
+                             PublishedYear = book.PublishedYear
+                         };
+
             return result;
         }
 
@@ -50,8 +64,8 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Repositories
         public async Task<Book> UpdateAsyncBook(string title, double Price)
         {
             Book result = await GetBookByName(title);
-            result.Price= Price;
-            result.DateUpdated=DateTime.Now;
+            result.Price = Price;
+            result.DateUpdated = DateTime.Now;
             _context.Update(result);
             _context.SaveChanges();
             return result;
