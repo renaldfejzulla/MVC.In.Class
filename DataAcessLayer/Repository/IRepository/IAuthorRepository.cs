@@ -1,4 +1,5 @@
-﻿using MVC.In.Class.DataAcessLayer.Entities;
+﻿using MVC.In.Class.DataAcessLayer.DTO;
+using MVC.In.Class.DataAcessLayer.Entities;
 
 namespace MVC.In.Class.DataAcessLayer.Repository.IRepository
 {
@@ -6,5 +7,6 @@ namespace MVC.In.Class.DataAcessLayer.Repository.IRepository
     {
         Task<IEnumerable<Author>> GetAll();
         Task<Author> CreateAsync(Author author);
+        Task<AuthorDTO> GetAuthorAsync(Guid id);
     }
 }

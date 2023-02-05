@@ -22,10 +22,12 @@ namespace MVC.In.Class
             // add database dependecy
             _ = builder.Services.AddDbContext<LibraryDBContext>(c =>
             {
-                c.UseSqlServer(builder.Configuration.GetConnectionString("Library"));
+                c.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
                 c.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             });
+            //add dipendency automapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //inject classes into program
             builder.Services.AddScoped<ILoginRepository, AuthenticatonLoginRepository>();
             builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();

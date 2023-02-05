@@ -1,4 +1,5 @@
-﻿using MVC.In.Class.DataAcessLayer.Entities;
+﻿using MVC.In.Class.DataAcessLayer.DTO;
+using MVC.In.Class.DataAcessLayer.Entities;
 
 namespace MVC.In.Class.Services
 {
@@ -6,5 +7,6 @@ namespace MVC.In.Class.Services
     {
         Task<IEnumerable<Author>> GetAuthorAsync();
         Task<Author> Create(Author author);
+        Task<AuthorDTO> GetAuthorById(Guid id);
     }
 }

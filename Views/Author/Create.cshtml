@@ -1,4 +1,4 @@
-﻿@model MVC.In.Class.DataAcessLayer.Entities.Author
+﻿@model MVC.In.Class.Models.AuthorViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -21,21 +21,6 @@
                 <label asp-for="BirthYear" class="control-label"></label>
                 <input asp-for="BirthYear" class="form-control" />
                 <span asp-validation-for="BirthYear" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateCreated" class="control-label"></label>
-                <input asp-for="DateCreated" class="form-control" />
-                <span asp-validation-for="DateCreated" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateUpdated" class="control-label"></label>
-                <input asp-for="DateUpdated" class="form-control" />
-                <span asp-validation-for="DateUpdated" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
