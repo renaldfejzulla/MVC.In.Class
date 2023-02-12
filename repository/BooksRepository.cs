@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MVC.In.Class.DataAcessLayer.Context;
 using MVC.In.Class.DataAcessLayer.Entities;
 using MVC.In.Class.Models;
 
