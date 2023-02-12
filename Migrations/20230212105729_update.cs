@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MVC.In.Class.Migrations
 {
-    public partial class updateusertable : Migration
+    public partial class update : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,20 +26,17 @@ namespace MVC.In.Class.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Books",
+                name: "BooksDto",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    PublishedYear = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    PublishedYear = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.PrimaryKey("PK_BooksDto", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,6 +69,30 @@ namespace MVC.In.Class.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserLogins", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    PublishedYear = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserLoginId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateUpdated = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Books_UserLogins_UserLoginId",
+                        column: x => x.UserLoginId,
+                        principalTable: "UserLogins",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,22 +156,32 @@ namespace MVC.In.Class.Migrations
             migrationBuilder.InsertData(
                 table: "Authors",
                 columns: new[] { "Id", "BirthYear", "DateCreated", "DateUpdated", "IsDeleted", "Name" },
-                values: new object[] { new Guid("059c294e-a47b-4bbd-81db-a1b4a312e8fc"), new DateTime(1913, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 1, 21, 20, 18, 11, 66, DateTimeKind.Local).AddTicks(2018), null, false, "JJR Tolkien" });
-
-            migrationBuilder.InsertData(
-                table: "Books",
-                columns: new[] { "Id", "DateCreated", "DateUpdated", "IsDeleted", "Price", "PublishedYear", "Title" },
-                values: new object[] { new Guid("8e0e4cfc-2205-4e9b-a9ec-4418cba94f2c"), new DateTime(2023, 1, 21, 20, 18, 11, 66, DateTimeKind.Local).AddTicks(2073), null, false, 1500.0, new DateTime(1980, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Hobbit" });
+                values: new object[] { new Guid("4d37d2b5-706f-4138-ad8d-3883dc05b458"), new DateTime(1913, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7448), null, false, "JJR Tolkien" });
 
             migrationBuilder.InsertData(
                 table: "UserLogins",
                 columns: new[] { "Id", "DateCreated", "DateUpdated", "IsDeleted", "Password", "Roles", "UserName" },
-                values: new object[] { new Guid("04d0c79c-8857-41f0-91a7-768e3ffa4cfc"), new DateTime(2023, 1, 21, 20, 18, 11, 66, DateTimeKind.Local).AddTicks(1593), null, false, "123", "admin", "edi" });
+                values: new object[] { new Guid("887ae534-6e47-4019-8be4-4e0954ec3e4a"), new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(6992), null, false, "123", "admin", "edi" });
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "Id", "DateCreated", "DateUpdated", "IsDeleted", "Price", "PublishedYear", "Title", "UserLoginId" },
+                values: new object[] { new Guid("5400ffd5-c85b-4591-8200-534a6f6044be"), new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7535), null, false, 1500.0, new DateTime(1980, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Kronik ne gur", new Guid("887ae534-6e47-4019-8be4-4e0954ec3e4a") });
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "Id", "DateCreated", "DateUpdated", "IsDeleted", "Price", "PublishedYear", "Title", "UserLoginId" },
+                values: new object[] { new Guid("e6f65354-67d5-4346-a549-859f5ee7a7a6"), new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7549), null, false, 1500.0, new DateTime(1980, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Harry Potter", new Guid("887ae534-6e47-4019-8be4-4e0954ec3e4a") });
+
+            migrationBuilder.InsertData(
+                table: "Books",
+                columns: new[] { "Id", "DateCreated", "DateUpdated", "IsDeleted", "Price", "PublishedYear", "Title", "UserLoginId" },
+                values: new object[] { new Guid("fe9c11e7-937a-47fd-b25f-24a19e7008d7"), new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7494), null, false, 1500.0, new DateTime(1980, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Hobbit", new Guid("887ae534-6e47-4019-8be4-4e0954ec3e4a") });
 
             migrationBuilder.InsertData(
                 table: "AuthorBooks",
                 columns: new[] { "Id", "AuthorId", "BookId", "DateCreated", "DateUpdated", "IsDeleted" },
-                values: new object[] { new Guid("84d125d6-91dd-4a80-8d85-741f0ea7ae79"), new Guid("059c294e-a47b-4bbd-81db-a1b4a312e8fc"), new Guid("8e0e4cfc-2205-4e9b-a9ec-4418cba94f2c"), new DateTime(2023, 1, 21, 20, 18, 11, 66, DateTimeKind.Local).AddTicks(2129), null, false });
+                values: new object[] { new Guid("e95759b0-fdbd-4e15-95d0-405ef19b4fb0"), new Guid("4d37d2b5-706f-4138-ad8d-3883dc05b458"), new Guid("fe9c11e7-937a-47fd-b25f-24a19e7008d7"), new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7573), null, false });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AuthorBooks_AuthorId",
@@ -171,6 +202,11 @@ namespace MVC.In.Class.Migrations
                 name: "IX_BookRentals_ClientId",
                 table: "BookRentals",
                 column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_UserLoginId",
+                table: "Books",
+                column: "UserLoginId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -182,7 +218,7 @@ namespace MVC.In.Class.Migrations
                 name: "BookRentals");
 
             migrationBuilder.DropTable(
-                name: "UserLogins");
+                name: "BooksDto");
 
             migrationBuilder.DropTable(
                 name: "Authors");
@@ -192,6 +228,9 @@ namespace MVC.In.Class.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "UserLogins");
         }
     }
 }

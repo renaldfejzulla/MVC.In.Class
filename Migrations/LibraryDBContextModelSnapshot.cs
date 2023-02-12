@@ -51,9 +51,9 @@ namespace MVC.In.Class.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b1900894-b59f-4e09-a229-c9299d2b179b"),
+                            Id = new Guid("4d37d2b5-706f-4138-ad8d-3883dc05b458"),
                             BirthYear = new DateTime(1913, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateCreated = new DateTime(2023, 2, 5, 14, 36, 41, 481, DateTimeKind.Local).AddTicks(1766),
+                            DateCreated = new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7448),
                             IsDeleted = false,
                             Name = "JJR Tolkien"
                         });
@@ -91,10 +91,10 @@ namespace MVC.In.Class.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c2a6dde2-8608-43cb-95bf-641b17dd4050"),
-                            AuthorId = new Guid("b1900894-b59f-4e09-a229-c9299d2b179b"),
-                            BookId = new Guid("3ae5f3cf-ac36-4764-9559-4bfc1314edc8"),
-                            DateCreated = new DateTime(2023, 2, 5, 14, 36, 41, 481, DateTimeKind.Local).AddTicks(2036),
+                            Id = new Guid("e95759b0-fdbd-4e15-95d0-405ef19b4fb0"),
+                            AuthorId = new Guid("4d37d2b5-706f-4138-ad8d-3883dc05b458"),
+                            BookId = new Guid("fe9c11e7-937a-47fd-b25f-24a19e7008d7"),
+                            DateCreated = new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7573),
                             IsDeleted = false
                         });
                 });
@@ -124,37 +124,45 @@ namespace MVC.In.Class.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("UserLoginId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserLoginId");
 
                     b.ToTable("Books");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3ae5f3cf-ac36-4764-9559-4bfc1314edc8"),
-                            DateCreated = new DateTime(2023, 2, 5, 14, 36, 41, 481, DateTimeKind.Local).AddTicks(1909),
+                            Id = new Guid("fe9c11e7-937a-47fd-b25f-24a19e7008d7"),
+                            DateCreated = new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7494),
                             IsDeleted = false,
                             Price = 1500.0,
                             PublishedYear = new DateTime(1980, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Hobbit"
+                            Title = "The Hobbit",
+                            UserLoginId = new Guid("887ae534-6e47-4019-8be4-4e0954ec3e4a")
                         },
                         new
                         {
-                            Id = new Guid("dead9b37-0c2f-41f5-b593-deaf04ae7350"),
-                            DateCreated = new DateTime(2023, 2, 5, 14, 36, 41, 481, DateTimeKind.Local).AddTicks(1968),
+                            Id = new Guid("5400ffd5-c85b-4591-8200-534a6f6044be"),
+                            DateCreated = new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7535),
                             IsDeleted = false,
                             Price = 1500.0,
                             PublishedYear = new DateTime(1980, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Kronik ne gur"
+                            Title = "Kronik ne gur",
+                            UserLoginId = new Guid("887ae534-6e47-4019-8be4-4e0954ec3e4a")
                         },
                         new
                         {
-                            Id = new Guid("a8cc4612-2500-4c1e-9547-a1b89d3b3991"),
-                            DateCreated = new DateTime(2023, 2, 5, 14, 36, 41, 481, DateTimeKind.Local).AddTicks(1988),
+                            Id = new Guid("e6f65354-67d5-4346-a549-859f5ee7a7a6"),
+                            DateCreated = new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(7549),
                             IsDeleted = false,
                             Price = 1500.0,
                             PublishedYear = new DateTime(1980, 2, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Harry Potter"
+                            Title = "Harry Potter",
+                            UserLoginId = new Guid("887ae534-6e47-4019-8be4-4e0954ec3e4a")
                         });
                 });
 
@@ -252,8 +260,8 @@ namespace MVC.In.Class.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a7e7c675-325c-43ee-ac71-4624d78a1243"),
-                            DateCreated = new DateTime(2023, 2, 5, 14, 36, 41, 481, DateTimeKind.Local).AddTicks(1029),
+                            Id = new Guid("887ae534-6e47-4019-8be4-4e0954ec3e4a"),
+                            DateCreated = new DateTime(2023, 2, 12, 11, 57, 29, 87, DateTimeKind.Local).AddTicks(6992),
                             IsDeleted = false,
                             Password = "123",
                             Roles = "admin",
@@ -301,6 +309,17 @@ namespace MVC.In.Class.Migrations
                     b.Navigation("Book");
                 });
 
+            modelBuilder.Entity("MVC.In.Class.DataAcessLayer.Entities.Book", b =>
+                {
+                    b.HasOne("MVC.In.Class.DataAcessLayer.Entities.UserLogin", "UserLogin")
+                        .WithMany("Books")
+                        .HasForeignKey("UserLoginId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserLogin");
+                });
+
             modelBuilder.Entity("MVC.In.Class.DataAcessLayer.Entities.BookRentals", b =>
                 {
                     b.HasOne("MVC.In.Class.DataAcessLayer.Entities.Book", "Book")
@@ -328,6 +347,11 @@ namespace MVC.In.Class.Migrations
             modelBuilder.Entity("MVC.In.Class.DataAcessLayer.Entities.Book", b =>
                 {
                     b.Navigation("AuthorBooks");
+                });
+
+            modelBuilder.Entity("MVC.In.Class.DataAcessLayer.Entities.UserLogin", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

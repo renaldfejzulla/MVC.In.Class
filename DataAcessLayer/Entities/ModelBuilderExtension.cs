@@ -33,6 +33,7 @@ namespace MVC.In.Class.DataAcessLayer.Entities
                 Title = "The Hobbit",
                 Price = 1500,
                 PublishedYear = new DateTime(1980, 2, 2),
+                UserLoginId = user.Id,
               
 
             };
@@ -44,6 +45,7 @@ namespace MVC.In.Class.DataAcessLayer.Entities
                 Title = "Kronik ne gur",
                 Price = 1500,
                 PublishedYear = new DateTime(1980, 2, 2),
+                UserLoginId = user.Id,
 
 
             };
@@ -55,6 +57,7 @@ namespace MVC.In.Class.DataAcessLayer.Entities
                 Title = "Harry Potter",
                 Price = 1500,
                 PublishedYear = new DateTime(1980, 2, 2),
+                UserLoginId = user.Id,
 
 
             };
