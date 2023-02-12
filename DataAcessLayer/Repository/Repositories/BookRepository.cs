@@ -35,21 +35,36 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Repositories
         {
             //var result = await _context.Books.Where(x=> x.IsDeleted==false).ToListAsync();
 
+            var test = _context.Books
+                .Include(a => a.UserLogin)
+                .Include(b => b.AuthorBooks)
+                .Where(a => a.IsDeleted == false).Select(a => new BookDTO
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Price = a.Price,
+                    PublishedYear = a.PublishedYear,
+                    Roles = a.UserLogin.Roles
+                });
+
+
+
             //left join using linQ in C#
             var result = await (from book in _context.Books
-                         join authorBook in _context.AuthorBooks
-                         on book.Id equals authorBook.BookId into left
-                         from a in left.DefaultIfEmpty()
-                         join Users in _context.UserLogins
-                         on book.UserLoginId equals Users.Id
-                         select new BookDTO
-                         {
-                             Id = book.Id,
-                             Title = book.Title,
-                             Price = book.Price,
-                             PublishedYear = book.PublishedYear,
-                             Roles = Users.Roles
-                         }).ToListAsync();
+                                join authorBook in _context.AuthorBooks
+                                on book.Id equals authorBook.BookId into left
+                                from a in left.DefaultIfEmpty()
+                                join Users in _context.UserLogins
+                                on book.UserLoginId equals Users.Id
+                                where book.IsDeleted ==false
+                                select new BookDTO
+                                {
+                                    Id = book.Id,
+                                    Title = book.Title,
+                                    Price = book.Price,
+                                    PublishedYear = book.PublishedYear,
+                                    Roles = Users.Roles
+                                }).ToListAsync();
             return result;
         }
 
