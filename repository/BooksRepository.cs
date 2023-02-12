@@ -19,12 +19,15 @@ namespace MVC.In.Class.repository
                           join AuthBook in _context.AuthorBooks
                           on book.Id equals AuthBook.BookId into left
                           from a in left.DefaultIfEmpty()
+                          join Users in _context.UserLogins
+                          on book.UserLoginId equals Users.Id 
                           select new BooksDto
                           {
                               Id = book.Id,
                               Title = book.Title,
                               Price = book.Price,
                               PublishedYear = book.PublishedYear,
+                              Roles=Users.Roles
 
                           }).ToListAsync();
 

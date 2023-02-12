@@ -11,12 +11,13 @@ namespace MVC.In.Class.Controllers
         private readonly IAuthorService authorService;
         // define the mapper
         private readonly IMapper _mapper;
+
         public AuthorController(IAuthorService authorService, IMapper mapper)
         {
             this.authorService = authorService;
-            _mapper = mapper;  
+            _mapper = mapper;
         }
-      
+
         public async Task<IActionResult> Index(string searchString)
         {
             var resultTotal = await authorService.GetAll(searchString);

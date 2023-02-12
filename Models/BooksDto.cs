@@ -6,5 +6,6 @@
         public string Title { get; set; }
         public double Price { get; set; }
         public DateTime PublishedYear { get; set; }
+        public string Roles { get; set; }
     }
 }
