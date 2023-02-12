@@ -28,9 +28,5 @@ namespace MVC.In.Class.DataAcessLayer.Entities
             modelBuilder.Seed();
         }
 
-
-        public DbSet<MVC.In.Class.Models.BooksDto> BooksDto { get; set; }
-
-
     }
 }
