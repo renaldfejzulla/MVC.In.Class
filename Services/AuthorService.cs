@@ -22,9 +22,9 @@ namespace MVC.In.Class.Services
             return result;
         }
 
-        public async Task<IEnumerable<Author>> GetAuthorAsync()
+        public async Task<IEnumerable<Author>> GetAuthorAsync(string search)
         {
-            var result = await _repository.GetAll();
+            var result = await _repository.GetAll(search);
             return result;
         }
 

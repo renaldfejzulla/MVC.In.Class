@@ -21,9 +21,14 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Repositories
             return result.Entity;
         }
 
-        public async Task<IEnumerable<Author>> GetAll()
+        public async Task<IEnumerable<Author>> GetAll(string search)
         {
-            var result = await _context.Authors.ToListAsync();
+            var result = await _context.Authors.Where(a => a.IsDeleted == false).ToListAsync();
+            if (!string.IsNullOrEmpty(search))
+            {
+                result = await _context.Authors.Where(a => a.IsDeleted == false && a.Name.Contains(search)).ToListAsync();
+            }
+
             return result;
         }
 

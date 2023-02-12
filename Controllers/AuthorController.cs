@@ -18,9 +18,11 @@ namespace MVC.In.Class.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(_mapper));
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string SearchString)
         {
-            var resultTotal = await _authorService.GetAuthorAsync();
+
+            var resultTotal = await _authorService.GetAuthorAsync(SearchString);
             return View(resultTotal);
         }
 
