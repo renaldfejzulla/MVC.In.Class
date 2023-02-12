@@ -16,12 +16,14 @@ namespace MVC.In.Class.Controllers
             this.authorService = authorService;
             _mapper = mapper;  
         }
-
-        public async Task<IActionResult> Index()
+      
+        public async Task<IActionResult> Index(string searchString)
         {
-            var resultTotal = await authorService.GetAll();
+            var resultTotal = await authorService.GetAll(searchString);
 
+         
             return View(resultTotal);
+           
         }
 
         [HttpPost]

@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<MVC.In.Class.DataAcessLayer.Entities.Author>
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,6 +10,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+@using (Html.BeginForm("Index", "Author", FormMethod.Get))
+{
+    <p>
+       Kerko ne tabele author: @Html.TextBox("SearchString")  
+        <input type="submit" value="Search" /></p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -61,3 +68,4 @@
 }
     </tbody>
 </table>
+

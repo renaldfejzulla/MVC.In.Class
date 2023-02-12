@@ -13,9 +13,16 @@ namespace MVC.In.Class.repository
             _context = context;
         }
 
-        public async Task<IEnumerable<Author>> GetAllAuthor()
-        {
-            return await _context.Authors.Where(author => author.IsDeleted == false).ToListAsync();
+        public async Task<IEnumerable<Author>> GetAllAuthor(string searchString)
+        {      
+            var result = await _context.Authors.Where(author => author.IsDeleted == false).ToListAsync();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                result = await _context.Authors.Where(author => author.IsDeleted == false &&author.Name.Contains(searchString)).ToListAsync();
+            }
+            
+            return result;
         }
         public async Task<Author> CreateAuthor(Author author)
         {

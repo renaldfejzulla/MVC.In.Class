@@ -16,9 +16,9 @@ namespace MVC.In.Class.Services
             LoginRepository = loginRepository;
         }
 
-        public async Task<IEnumerable<Author>> GetAll()
+        public async Task<IEnumerable<Author>> GetAll(string searchString)
         {
-            return await AuthorRepository.GetAllAuthor();
+            return await AuthorRepository.GetAllAuthor(searchString);
         }
         public async Task<Author> CreateAuthor(Author author)
         {
