@@ -17,7 +17,7 @@ namespace MVC.In.Class.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             var result = await _bookservice.GetBooksAsync();
             var mappedBook = _mapper.Map<IEnumerable<BookViewModel>>(result);

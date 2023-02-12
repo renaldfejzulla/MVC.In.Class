@@ -47,7 +47,8 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Repositories
                              Id = book.Id,
                              Title = book.Title,
                              Price = book.Price,
-                             PublishedYear = book.PublishedYear
+                             PublishedYear = book.PublishedYear,
+                             Roles = Users.Roles
                          }).ToListAsync();
             return result;
         }
