@@ -15,12 +15,28 @@ namespace MVC.In.Class.repository
 
         public async Task<IEnumerable<BooksDto>> GetAllBooks()
         {
+            //perdori i i include per te bere join
+            var test = _context.Books
+                .Include(a => a.UserLogin)
+                .Include(b => b.AuthorBooks)
+                .Where(a => a.IsDeleted == false).Select(a=> new BooksDto
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Price = a.Price,
+                    PublishedYear = a.PublishedYear,
+                    Roles = a.UserLogin.Roles
+
+                });
+
+
             var result = await (from book in _context.Books
                           join AuthBook in _context.AuthorBooks
                           on book.Id equals AuthBook.BookId into left
                           from a in left.DefaultIfEmpty()
                           join Users in _context.UserLogins
-                          on book.UserLoginId equals Users.Id 
+                          on book.UserLoginId equals Users.Id
+                          where book.IsDeleted == false
                           select new BooksDto
                           {
                               Id = book.Id,

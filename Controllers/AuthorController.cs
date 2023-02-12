@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MVC.In.Class.DataAcessLayer.Entities;
 using MVC.In.Class.Models;
@@ -6,6 +7,7 @@ using MVC.In.Class.Services.IServices;
 
 namespace MVC.In.Class.Controllers
 {
+   
     public class AuthorController : Controller
     {
         private readonly IAuthorService authorService;
@@ -26,7 +28,7 @@ namespace MVC.In.Class.Controllers
             return View(resultTotal);
            
         }
-
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AuthorViewModel authorview)
