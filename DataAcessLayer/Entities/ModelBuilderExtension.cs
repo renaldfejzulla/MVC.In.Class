@@ -6,6 +6,14 @@ namespace MVC.In.Class.DataAcessLayer.Entities
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            var user = new UserLogin
+            {
+                Id = Guid.NewGuid(),
+                UserName = "user",
+                Password = "1234",
+                Roles = "admin"
+            };
+
             var author = new Author
             {
                 Id = Guid.NewGuid(),
@@ -21,6 +29,7 @@ namespace MVC.In.Class.DataAcessLayer.Entities
                 Title = "The Hobbit",
                 Price = 1500,
                 PublishedYear = new DateTime(1980, 2, 2),
+                UserLoginId = user.Id
             };
             var book1 = new Book
             {
@@ -28,6 +37,8 @@ namespace MVC.In.Class.DataAcessLayer.Entities
                 Title = "Kronik ne Gur",
                 Price = 1500,
                 PublishedYear = new DateTime(1980, 2, 2),
+                UserLoginId = user.Id
+
             };
             var book2 = new Book
             {
@@ -35,6 +46,7 @@ namespace MVC.In.Class.DataAcessLayer.Entities
                 Title = "Harry Potter",
                 Price = 1500,
                 PublishedYear = new DateTime(1980, 2, 2),
+                UserLoginId = user.Id
             };
 
 
@@ -47,13 +59,6 @@ namespace MVC.In.Class.DataAcessLayer.Entities
                 BookId = book.Id,
                 AuthorId = author.Id,
             });
-            var user = new UserLogin
-            {
-                Id = Guid.NewGuid(),
-                UserName = "user",
-                Password = "1234",
-                Roles = "admin"
-            };
             _ = modelBuilder.Entity<UserLogin>().HasData(user);
         }
     }

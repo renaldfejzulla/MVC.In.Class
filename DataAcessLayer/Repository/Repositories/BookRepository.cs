@@ -40,6 +40,8 @@ namespace MVC.In.Class.DataAcessLayer.Repository.Repositories
                          join authorBook in _context.AuthorBooks
                          on book.Id equals authorBook.BookId into left
                          from a in left.DefaultIfEmpty()
+                         join Users in _context.UserLogins
+                         on book.UserLoginId equals Users.Id
                          select new BookDTO
                          {
                              Id = book.Id,
